@@ -8,6 +8,7 @@ let colorSwitcherId = null;
 
 refs.startBtn.addEventListener('click', onStartBtnClick);
 refs.stopBtn.addEventListener('click', onStopBtnClick);
+refs.stopBtn.disabled = true;
 
 function onStartBtnClick() {
     colorSwitcherId = setInterval(() => {

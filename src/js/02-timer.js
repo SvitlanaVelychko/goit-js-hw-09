@@ -35,18 +35,18 @@ const options = {
 flatpickr(refs.input, options);
 refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', onStart);
-onStopTimer();
 
 function onStart() {
     timerId = setInterval(() => {
         const currentDate = Date.now();
         time = selectedDate - currentDate;
         onUpdateTimer();
+        onStopTimer();
     }, DELAY);
 }
 
 function onStopTimer() {
-    if (time = 0) {
+    if (time < 1000) {
         clearInterval(timerId);
         refs.startBtn.disabled = true;
     }
