@@ -46,7 +46,7 @@ function onStart() {
 }
 
 function onStopTimer() {
-    if (time < 1000) {
+    if (time < DELAY) {
         clearInterval(timerId);
         refs.startBtn.disabled = true;
     }
