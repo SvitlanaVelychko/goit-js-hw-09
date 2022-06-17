@@ -29,7 +29,7 @@ function onFormSubmit(event) {
     })
     .catch(error => {
       Notiflix.Notify.failure(error);
-    });
+    })
   }
 }
 
