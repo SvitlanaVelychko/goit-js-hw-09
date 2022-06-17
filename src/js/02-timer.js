@@ -12,6 +12,8 @@ const refs = {
     timerSecondsValue: document.querySelector('span[data-seconds]'),
 }
 let selectedDate = null;
+let timerId = null;
+let time = null;
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -33,21 +35,29 @@ const options = {
 flatpickr(refs.input, options);
 refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', onStart);
+onStopTimer();
 
 function onStart() {
-    const timerId = setInterval(() => {
+    timerId = setInterval(() => {
         const currentDate = Date.now();
-        const time = selectedDate - currentDate;
-        const { days, hours, minutes, seconds } = convertMs(time);
-        refs.timerDaysValue.textContent = addLeadingZero(days);
-        refs.timerHoursValue.textContent = addLeadingZero(hours);
-        refs.timerMinutesValue.textContent = addLeadingZero(minutes);
-        refs.timerSecondsValue.textContent = addLeadingZero(seconds);
-        if (time <= DELAY) {
-            clearInterval(timerId);
-            refs.startBtn.disabled = true;
-        }
+        time = selectedDate - currentDate;
+        onUpdateTimer();
     }, DELAY);
+}
+
+function onStopTimer() {
+    if (time = 0) {
+        clearInterval(timerId);
+        refs.startBtn.disabled = true;
+    }
+}
+
+function onUpdateTimer() {
+    const { days, hours, minutes, seconds } = convertMs(time);
+    refs.timerDaysValue.textContent = addLeadingZero(days);
+    refs.timerHoursValue.textContent = addLeadingZero(hours);
+    refs.timerMinutesValue.textContent = addLeadingZero(minutes);
+    refs.timerSecondsValue.textContent = addLeadingZero(seconds);
 }
 
 function convertMs(ms) {
